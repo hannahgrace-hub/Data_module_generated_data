@@ -1,0 +1,72 @@
+---
+title: "Data Management Module"
+author: "Hannah Chan-Henry"
+date: "2026-02-18"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+```
+
+The data set I am using is simulated data based on a real data set of tree forest data. The range of the values are accurate to the real data but the values are randomly generated within that range.
+
+```{r tree data}
+tree_data<-read_xlsx("data/Generated tree data.xlsx", sheet= "Tree data")
+head(tree_data)
+```
+```{r metadata}
+species_code_data<-data.frame(read_xlsx("data/Generated tree data.xlsx", sheet= "Species code"))
+head(species_code_data)
+description_data<-data.frame(read_xlsx("data/Generated tree data.xlsx", sheet= "Data description"))
+description_data
+```
+
+
+```{r tidy data}
+# some of the data is tidy but I need to further tidy the data.
+tidy_tree_data1<-tree_data %>% select(-COND1, -COND2, -COND3, -COND4) %>%
+  pivot_longer(cols = c("DBH1", "DBH2", "DBH3", "DBH4"),
+               names_to = "DBH year", values_to = "DBH")
+
+tidy_tree_data2<-tree_data %>% select(COND1, COND2, COND3, COND4) %>%
+  pivot_longer(cols = c("COND1", "COND2", "COND3", "COND4"),
+               names_to = "COND year", values_to = "COND")
+
+tidy_tree_data<-cbind(tidy_tree_data1,tidy_tree_data2)
+head(tidy_tree_data)
+
+# change the codes like DBH1 and COND1 to the years which they represent 
+
+tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH1"] <- "1985"
+tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH2"] <- "1991"
+tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH3"] <- "2001"
+tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH4"] <- "2021"
+
+tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND1"] <- "1985"
+tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND2"] <- "1991"
+tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND3"] <- "2001"
+tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND4"] <- "2021"
+head(tidy_tree_data)
+```
+Now I need to add to my meta data as I have changed the column names. I also need to remove the variables that are no longer being used.
+
+```{r add to description metadata}
+new_row <- data.frame(Variable = c("DBH year", "COND year"), Description = c("Year which the DBH measurement was taken","Year which condition code was measured"), stringsAsFactors = FALSE)
+description_new<-rbind(description_data,new_row)
+description_new<-description_new[-c(1,4,5,6,7,8,9,10,11),]
+description_new
+```
+I need to remove any species that are in the metadata but are not in the species data.
+```{r add to species metadata}
+allow<-unique(tidy_tree_data$Species)
+filtered_species_names <- species_code_data[species_code_data$Code.Number %in% allow, ]
+# the number of species that were removed from the code name list
+#nrow(species_code_data)-nrow(filtered_species_names)
+```
+`r nrow(species_code_data)-nrow(filtered_species_names)` species were removed from the species code list.
