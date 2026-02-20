@@ -10,39 +10,40 @@ Data cleaning and data summary is included in the .Rmd and has been knitted to t
 
 The species are all given a code:
 
-Code.Number                     Scientific.Name
-          1                    Cyathea capensis
-          2                 Podocarpus falcatus
-          3               Podocarpus latifolius
-          4             Widdringtonia nodiflora
-          5                     Strelitzia alba
-          6                      Myrica serrata
-          7                     Celtis africana
-          8                   Ficus burtt-davyi
-          9                           Ficus sur
-          10                Faurea macnaughtonii
-          11                  Colpoon compressum
-          12                      Ocotea bullata
-          13                   Maerua racemulosa
-          14            Pittosporum viridiflorum
-          15                    Cunonia capensis
-          16             Platylophus trifoliatus
-          17               Trichocladus crinitus
-          18             Trichocladus ellipticus
-          19                     Prunus africana
-          20              Schotia afra var. afra
-          21                   Schotia latifolia
-          22 Virgilia oroboides subsp.ferruginea
-          23                 Virgilia divaricata
-          24                 Zanthoxylum capense
-          25                   Zanthoxylum davyi
-          26                 Calodendrum capense
-          27                   Vepris lanceolata
-          28                    Clausena anisata
-          29                  Ekebergia capensis
-          30                  Lachnostylis hirta
-          31               Laurophyllus capensis
-          32                   Rhus chirendensis
-          33                        Rhus crenata
-          34                         Rhus glauca
-          35                     Rhus longispina
+(Code.Number)                     Scientific.Name:
+
+          (1)                    Cyathea capensis
+          (2)                 Podocarpus falcatus
+          (3)               Podocarpus latifolius
+          (4)             Widdringtonia nodiflora
+          (5)                     Strelitzia alba
+          (6)                      Myrica serrata
+          (7)                     Celtis africana
+          (8)                   Ficus burtt-davyi
+          (9)                           Ficus sur
+          (10)                Faurea macnaughtonii
+          (11)                  Colpoon compressum
+          (12)                      Ocotea bullata
+          (13)                   Maerua racemulosa
+          (14)            Pittosporum viridiflorum
+          (15)                    Cunonia capensis
+          (16)             Platylophus trifoliatus
+          (17)               Trichocladus crinitus
+          (18)             Trichocladus ellipticus
+          (19)                     Prunus africana
+          (20)              Schotia afra var. afra
+          (21)                   Schotia latifolia
+          (22) Virgilia oroboides subsp.ferruginea
+          (23)                 Virgilia divaricata
+          (24)                 Zanthoxylum capense
+          (25)                   Zanthoxylum davyi
+          (26)                 Calodendrum capense
+          (27)                   Vepris lanceolata
+          (28)                    Clausena anisata
+          (29)                  Ekebergia capensis
+          (30)                  Lachnostylis hirta
+          (31)               Laurophyllus capensis
+          (32)                   Rhus chirendensis
+          (33)                        Rhus crenata
+          (34)                         Rhus glauca
+          (35)                     Rhus longispina
