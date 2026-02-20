@@ -14,7 +14,7 @@ library(tidyverse)
 library(readxl)
 ```
 
-The data set I am using is simulated data based on a real data set of tree forest data. The range of the values are accurate to the real data but the values are randomly generated within that range.
+The data set I am using is simulated data based on a real data set of tree forest data. The range of the values are accurate to the real data but the values are randomly generated within that range. This code should be mostly transferable when I work with the real data set. 
 
 ```{r tree data}
 tree_data<-read_xlsx("data/Generated tree data.xlsx", sheet= "Tree data")
@@ -32,32 +32,31 @@ description_data
 # some of the data is tidy but I need to further tidy the data.
 tidy_tree_data1<-tree_data %>% select(-COND1, -COND2, -COND3, -COND4) %>%
   pivot_longer(cols = c("DBH1", "DBH2", "DBH3", "DBH4"),
-               names_to = "DBH year", values_to = "DBH")
+               names_to = "Survey year", values_to = "DBH")
 
 tidy_tree_data2<-tree_data %>% select(COND1, COND2, COND3, COND4) %>%
   pivot_longer(cols = c("COND1", "COND2", "COND3", "COND4"),
                names_to = "COND year", values_to = "COND")
 
 tidy_tree_data<-cbind(tidy_tree_data1,tidy_tree_data2)
-head(tidy_tree_data)
 
 # change the codes like DBH1 and COND1 to the years which they represent 
 
-tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH1"] <- "1985"
-tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH2"] <- "1991"
-tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH3"] <- "2001"
-tidy_tree_data$`DBH year`[tidy_tree_data$`DBH year` == "DBH4"] <- "2021"
+tidy_tree_data$`Survey year`[tidy_tree_data$`Survey year` == "DBH1"] <- "1985"
+tidy_tree_data$`Survey year`[tidy_tree_data$`Survey year` == "DBH2"] <- "1991"
+tidy_tree_data$`Survey year`[tidy_tree_data$`Survey year` == "DBH3"] <- "2001"
+tidy_tree_data$`Survey year`[tidy_tree_data$`Survey year` == "DBH4"] <- "2021"
 
-tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND1"] <- "1985"
-tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND2"] <- "1991"
-tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND3"] <- "2001"
-tidy_tree_data$`COND year`[tidy_tree_data$`COND year` == "COND4"] <- "2021"
+tidy_tree_data<-tidy_tree_data%>%select(-`COND year`)
+
+#remove NA from data
+tidy_tree_data <- na.omit(tidy_tree_data) 
 head(tidy_tree_data)
 ```
 Now I need to add to my meta data as I have changed the column names. I also need to remove the variables that are no longer being used.
 
 ```{r add to description metadata}
-new_row <- data.frame(Variable = c("DBH year", "COND year"), Description = c("Year which the DBH measurement was taken","Year which condition code was measured"), stringsAsFactors = FALSE)
+new_row <- data.frame(Variable = c("DBH","COND","Survey year"), Description = c("Diameter at Breast Height","Condition code measured","Year which measurements were taken"), stringsAsFactors = FALSE)
 description_new<-rbind(description_data,new_row)
 description_new<-description_new[-c(1,4,5,6,7,8,9,10,11),]
 description_new
@@ -70,3 +69,11 @@ filtered_species_names <- species_code_data[species_code_data$Code.Number %in% a
 #nrow(species_code_data)-nrow(filtered_species_names)
 ```
 `r nrow(species_code_data)-nrow(filtered_species_names)` species were removed from the species code list.
+
+Now I need to create a summary the data. We should see very little pattern in the data as the values are random. This is just an example of what could be done with the larger, real data set. 
+
+```{r summary plots}
+boxplot(tidy_tree_data$DBH~tidy_tree_data$`Survey year`, xlab = "Survey year", ylab="DBH")
+
+```
+
