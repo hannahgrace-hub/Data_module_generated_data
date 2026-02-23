@@ -2,7 +2,7 @@
 
 Binder link: 
 
-This repository is part of honour module assignment. I am using randomly generated data based on the data I will have in my project.
+This repository is part of honour module assignment. I am using randomly generated data based on the data I will have in my project. Code was generated in excel using accuarate ranges from the actual data set.
 The project looks at changes in forest dynamics in Knysna and how climate variability affects these changes.
 The data includes tree diameter at breast height (DBH), tree condition code, species and year of first survey within plots over several years.
 Surveys were taken in 1985, 1991, 2001 and 2021. For some plots, the first survey was taken in later years (after 1985). This does mean that were is some missing data.
