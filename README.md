@@ -1,6 +1,6 @@
 # Data_module_generated_data
 
-Binder link: 
+Binder link: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/hannahgrace-hub/Data_module_generated_data/HEAD)
 
 This repository is part of honour module assignment. I am using randomly generated data based on the data I will have in my project. Code was generated in excel using accuarate ranges from the actual data set.
 The project looks at changes in forest dynamics in Knysna and how climate variability affects these changes.
